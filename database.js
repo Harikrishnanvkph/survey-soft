@@ -1,10 +1,10 @@
 const client = require('./server.js');
 
-const dbClient = client.db("Survey"). collection("Users");
+//const dbClient = client.db("Survey").collection("Users");
 
 //create User
 async function createUser(mail, password){
-    const ce = await dbClient.insertOne({
+    const ce = await client.db("Survey").collection("Users").insertOne({
 mail : mail,
 survey : {
 created : [],
@@ -39,7 +39,7 @@ async function setId(user_id){
 
 //show created Surveys
 async function getCreatedSurveys(mail){
-    const ce = await dbClient.findOne({mail : mail},{"survey.created" : 1,_id : 0});
+    const ce = await client.db("Survey").collection("Users").findOne({mail : mail},{"survey.created" : 1,_id : 0});
     return ce;
 }
 
@@ -52,7 +52,7 @@ async function createSurvey(mail, data) {
   };
 
   // Add to the user's created surveys list
-  await dbClient.updateOne(
+  await client.db("Survey").collection("Users").updateOne(
     { mail: mail },
     { $push: { "survey.created": sur } }
   );
@@ -77,14 +77,14 @@ async function addAttendedSurvey(mail,data,surveyNo){
 		survey_no : surveyNo,
         survey_data : data
      }
-    const ce = await dbClient.updateOne({mail : mail}
+    const ce = await client.db("Survey").collection("Users").updateOne({mail : mail},
     	{ $push: { "survey.attended":  sur} });
     return ce;
 }
 
 //show attended Surveys
 async function getAttendedSurveys(mail){
-    const ce = await dbClient.findOne({mail : mail},{"survey.attended" : 1,_id : 0});
+    const ce = await client.db("Survey").collection("Users").findOne({mail : mail},{"survey.attended" : 1,_id : 0});
     return ce;
 }
 
