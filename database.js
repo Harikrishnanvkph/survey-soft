@@ -3,7 +3,7 @@ const client = require('./server.js');
 //const dbClient = client.db("Survey").collection("Users");
 
 //create User
-async function createUser(mail, password){
+async function createUser(mail){
     const ce = await client.db("Survey").collection("Users").insertOne({
 mail : mail,
 survey : {
