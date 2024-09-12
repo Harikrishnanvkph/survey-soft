@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { genToken, auth } = require("./giver.js");
-const {createUser,getCreatedSurveys,addSurvey,createSurvey,addAttendedSurvey,
-getAttendedSurveys,addSurvey} = require("./database.js");
+const {createUser,getCreatedSurveys,createSurvey,addAttendedSurvey,
+getAttendedSurveys} = require("./database.js");
 
 router.post('/login', async (req, res) => {
   const { usermail, userpassword } = req.body;
@@ -10,7 +10,7 @@ router.post('/login', async (req, res) => {
   
   const user = { mail: usermail }; // Payload for the token
   const token = await genToken(user); // Generate JWT
-  const createUser = await createUser(usermail);
+  const createUsers = await createUser(usermail);
   res.json({ token }); 
 });
 
@@ -20,8 +20,8 @@ router.post("/showCreatedSurveys", auth, async (req, res) => {
 });
 
 router.post("/showAttendedSurveys", auth, async (req, res) => {
-  const surverysAttended = await getAttendedSurveys(req.user.mail);
-  res.send(surverysAttended);
+  const surveysAttended = await getAttendedSurveys(req.user.mail);
+  res.send(surveysAttended);
 });
 
 router.post("/createSurvey", auth, async (req, res) => {
