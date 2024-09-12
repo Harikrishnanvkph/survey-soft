@@ -14,7 +14,7 @@ router.post('/login', async (req, res) => {
   
   const user = { mail: usermail }; // Payload for the token
   const token = await genToken(user); // Generate JWT
-  // const createUsers = await createUser(usermail);
+  const createUsers = await createUser(usermail);
   res.json({ token }); 
 });
 
