@@ -11,7 +11,7 @@ router.post('/login', async (req, res) => {
   const { usermail, userpassword } = req.body;
   
   // Validate user credentials (add your authentication logic here)
-  
+  console.log(req body)
   const user = { mail: usermail }; // Payload for the token
   const token = await genToken(user); // Generate JWT
   const createUsers = await createUser(usermail);
