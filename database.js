@@ -1,6 +1,6 @@
 const client = require('./server.js');
 
-//const dbClient = client.db("Survey").collection("Users");
+// const dbClient = client.db("Survey").collection("Users");
 
 //create User
 async function createUser(mail){
@@ -10,6 +10,7 @@ survey : {
 created : [],
 attended : []}
 });
+console.log(ce)
     return ce;
 }
 
