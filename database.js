@@ -1,4 +1,4 @@
-const client = require('server.js');
+const client = require('./server.js');
 
 const dbClient = client.db("Survey"). collection("Users");
 
