@@ -44,17 +44,26 @@ async function getCreatedSurveys(mail){
 }
 
 //create Survey
-async function createSurvey(mail,data){
-	const surveyNo = await getId();
-	const sur = {
-		survey_no : surveyNo,
-        survey_data : data
-     }
-    const ce = await dbClient.updateOne({mail : mail},{
-    	{ $push: { "survey.created":  sur} });
-    await addSurvey(mail,sur);
-    await setId(surveyNo);
-    return ce;
+async function createSurvey(mail, data) {
+  const surveyNo = await getId();
+  const sur = {
+    survey_no: surveyNo,
+    survey_data: data,
+  };
+
+  // Add to the user's created surveys list
+  await dbClient.updateOne(
+    { mail: mail },
+    { $push: { "survey.created": sur } }
+  );
+
+  // Add to the collection of all surveys
+  await addSurvey(mail, sur);
+
+  // Update the survey ID tracker
+  await setId(surveyNo);
+
+  return sur;
 }
 
 
