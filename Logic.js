@@ -3,6 +3,10 @@ const { genToken, auth } = require("./giver.js");
 const {createUser,getCreatedSurveys,createSurvey,addAttendedSurvey,
 getAttendedSurveys} = require("./database.js");
 
+router.get('/', (req, res) => {
+       res.send('Hello from Mobile Express Server!');
+     });
+     
 router.post('/login', async (req, res) => {
   const { usermail, userpassword } = req.body;
   
