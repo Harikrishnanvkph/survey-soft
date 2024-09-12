@@ -77,7 +77,7 @@ async function addAttendedSurvey(mail,data,surveyNo){
 		survey_no : surveyNo,
         survey_data : data
      }
-    const ce = await dbClient.updateOne({mail : mail},{
+    const ce = await dbClient.updateOne({mail : mail}
     	{ $push: { "survey.attended":  sur} });
     return ce;
 }
