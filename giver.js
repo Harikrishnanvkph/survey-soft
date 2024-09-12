@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 // Function to generate JWT token
 async function genToken(user) {
   const token = await jwt.sign(user, process.env.SECRET_KEY); // Set token expiration if needed
+  console.log(token)
   return token;
 }
 
